@@ -1,0 +1,60 @@
+{% extends "global.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Каталог GLAMMER</title>
+{% endblock  %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "products\styles\catalog.css" %}">
+{% endblock %}
+
+{% block main %}
+    <section class="catalog">
+        {% for product in products %}
+            <article class="item">
+                {% if product.image %}
+                    {% if product.discount %}
+                        <div class="container">
+                            <a href=""><img src="{{ product.image.url }}" alt="{{ product.name }}" class="image"></a>
+                            <div class="text">СКИДКА {{ product.discount }}%</div>
+                        </div>
+                    {% else %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                {% else %}
+                    <img src="{% static "main/images/default.jpg" %}" alt="Изображения нет!">
+                {% endif %}
+                <div class="description">
+                    <a href="{% url "catalog:product" product.id %}">{{ product.name }}</a>
+                    <p class="productId">{{ product.productId }}</p>
+                    <div class="colors">
+                        <button>Беж</button>
+                        <button>Чёрный</button>
+                    </div>
+                    {% if product.discount %}
+                        <div class="priceForSell">
+                            <p class="oldPrice">{{ product.price }} руб.</p>
+                            <p>{{ product.sellPrice }} руб.</p>
+                        </div>
+                    {% else %}
+                        <p>{{ product.price }} руб.</p>
+                    {% endif %}
+                    
+                    <button class="cartButton">Добавить в корзину</button>
+                </div>
+            </article>
+        {% empty %}
+            <div class="error"><h1>Нет элементов для отображения!</h1></div>
+        {% endfor %}
+        
+    </section>
+    <nav class="pagination">
+        <ul>
+            <li><a href="">&lt;</a>
+            <li><a href="">1</a>
+            <li><a href="">&gt;</a>
+        </ul>
+    </nav>
+{% endblock %}

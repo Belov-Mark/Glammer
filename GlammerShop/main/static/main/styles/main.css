@@ -1,0 +1,253 @@
+/* актуальное */
+.slider-container {
+    display: flex;
+    gap: 175px;
+    margin: 30px 0 70px 19%; 
+    flex-wrap: wrap;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5vw;
+    color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 0.5vw;
+    cursor: pointer;
+    font-size: 1vw;
+}
+
+.prev {
+    left: 0.5vw;
+}
+
+.next {
+    right: 0.5vw;
+}
+
+.dots {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    white-space: nowrap;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.6s ease;
+}
+
+.dot.active {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+/* новинки */
+.newCaps {
+    font-size: 1.5vw;
+    margin-right: 0.5vw;
+    display: inline;
+}
+
+.new {
+    font-size: 1vw;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 65px 110px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;    
+    font-size: 1.2vw;
+    margin: 35px 0 70px;
+}
+
+.item {
+    width: 100%;
+    max-width: 29%;
+    box-sizing: border-box;
+}
+
+.item img {
+    width: 490px;
+    height: auto;
+}
+
+.productId {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.colors button {
+    border: 1px #fff solid;
+    border-radius: 5px;
+    padding: 0px 3px;
+}
+
+.priceForSell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    gap: 5px;
+}
+
+.oldPrice {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.cartButton {
+    border: 1px #fff solid;
+    border-radius: 7px;
+    padding: 0px 4px;
+}
+
+.allNew {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 90px;
+}
+
+.buttonNew {
+    font-size: 1.2vw;
+    display: inline-flex;
+    color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 7px;
+    align-items: center;
+    padding: 3px 7px;
+}
+
+.buttonNew svg {
+    fill: rgba(255, 255, 255, 0.4);
+    width: 1vw;
+    padding-left: 10px;
+    padding-top: 4px;
+}
+
+.buttonNew:hover svg {
+    fill: rgba(255, 255, 255, 0.7)
+}
+
+
+
+/* скидки */
+.discount {
+    background-color: #fff;
+    color: #FF0000;
+    border-radius: 6px;
+    padding: 1px 7px;
+    font-size: 1.5vw;
+    margin-right: 0.5vw;
+}
+
+.discountAll {
+    font-size: 1vw;
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.image {
+    display: block;
+}
+
+.text {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 5px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* медиа-запросы для планшетов и мобильных устройств */
+@media (max-width: 1538px) {
+    .slider-container {
+        flex-direction: column;
+        margin: 30px 0px;
+    }
+
+    .item {
+        max-width: 40%;
+    }
+
+    .newCaps, .new {
+        font-size: 3.5vw;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+
+    .slider-container {
+        flex-direction: column;
+        margin: 30px 8%;
+    }
+
+    .item {
+        max-width: 100%;
+        margin: 20px 0;
+    }
+
+    .newCaps, .new, .discount, .discountAll {
+        font-size: 4.5vw;
+    }
+
+    .catalog {
+        font-size: 1.2rem;
+    }
+
+    .allNew {
+        margin-bottom: 50px;
+    }
+
+    .buttonNew {
+        font-size: 1rem;
+    }
+}
