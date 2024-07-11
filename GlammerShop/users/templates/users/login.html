@@ -1,0 +1,43 @@
+{% extends "global.html" %}
+{% load static %}
+
+{% block title %}
+    <title>GLAMMER | muslim</title>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "users/styles/login.css" %}">
+{% endblock %}
+
+{% block main %}
+    <p class="titleMain">АВТОРИЗАЦИЯ</p>
+    <div class="form-container">
+        <form method="post" class="form-elements" action="{% url 'users:login' %}">
+            <p class="bioMain">- У меня уже есть учётная запись</p>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_email">E-Mail<span class="red">*</span></label>
+                <input type="email" name="username" id="id_email" placeholder="E-Mail" value="{{ form.username.value }}" required autofocus>
+                {% if form.username.errors %}
+                    <p class="signError">{{ form.username.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password">Пароль<span class="red">*</span></label>
+                <input type="password" name="password" id="id_password" placeholder="Пароль" required>
+                {% if form.password.errors %}
+                    <p class="signError">{{ form.password.errors }}</p>
+                {% endif %}
+            </div>
+            <a class="recovery" href="{% url 'users:recovery' %}">Забыли пароль?</a>
+            <button class="submitBtn" type="submit">Вход</button>
+        </form>
+        
+        <div class="info">
+            <h3><b>Я - новый покупатель</b></h3>
+            <p>&nbsp;- Регистрация на сайте позволит быстро оформлять заказы, управлять заказами через личный кабинет, в полном объеме использовать возможности нашего интернет магазина.</p>
+            <a class="buttonForInfo" href="{% url 'users:signin' %}">Регистрация</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,135 @@
+.titleMain {
+    font-size: 36px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+form {
+    font-size: 23px;
+}
+
+.red {
+    color: red;
+}
+
+.form-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.form-elements {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 250px;
+}
+
+.form-group input {
+    height: 30px;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    font-size: inherit;
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+}
+
+.sex {
+    display: flex;
+    align-items: center;
+}
+
+.sex input {
+    margin-left: 5px;
+}
+
+.sex input[type="radio"] {
+    background-color: rgba(255, 255, 255, 0);
+    display: inline-flex;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #fff;
+    border-radius: 1px;
+    margin-right: 10px;
+    position: relative;
+}
+.sex input[type="radio"] + span {
+    display: inline-flex;
+    width: 5px;
+    height: 5px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    position: relative;
+}
+.sex input[type="radio"]:checked + span {
+    background-color: #fff;
+}
+.sex input[type="radio"]:checked + span::after {
+    content: '';
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.info {
+    width: 330px;
+    height: 195px;
+    background-color: #012224;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-left: 100px;
+    line-height: 23px;
+}
+
+.info p {
+    margin-top: 10px;
+}
+
+.agreement {
+    margin-top: 10px;
+    margin-left: 250px;
+    display: flex;
+    font-size: 12.3px;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.agreement input[tupe="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+.submitBtn {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-left: 250px;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 200px;
+    height: 40px;
+    font-size: 17px;
+}
+

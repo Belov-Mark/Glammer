@@ -33,7 +33,7 @@ class Subcategory(models.Model):
 
 class Product(models.Model):
     id = models.CharField(max_length=6, primary_key=True, default=generate_unique_id, unique=True)
-    name = models.CharField(max_length=150, unique=True, verbose_name='Название')
+    name = models.CharField(max_length=150, verbose_name='Название')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     image = models.ImageField(upload_to='product_images', blank=True, null=True)
     price = models.DecimalField(default=0, max_digits=7, decimal_places=0, verbose_name='Цена')

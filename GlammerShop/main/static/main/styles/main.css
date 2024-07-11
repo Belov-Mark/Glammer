@@ -91,7 +91,7 @@
     flex-wrap: wrap;
     gap: 65px 110px;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     text-align: center;    
     font-size: 1.2vw;
     margin: 35px 0 70px;
@@ -156,6 +156,7 @@
 
 .buttonNew svg {
     fill: rgba(255, 255, 255, 0.4);
+    opacity: 0.6;
     width: 1vw;
     padding-left: 10px;
     padding-top: 4px;

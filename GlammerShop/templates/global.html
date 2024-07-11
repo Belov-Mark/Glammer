@@ -5,7 +5,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="{% static "images/GlammerTitleImg.svg" %}" />
+    <link rel="icon" type="svg" href="{% static "images/GlammerTitleImg.svg" %}" />
     {% block title %}{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "styles/global.css" %}">
@@ -14,88 +14,80 @@
 </head>
 <body>
     {% comment %} first header {% endcomment %}
-    <header class="header primary-header">
-        <nav>
-            <ul>
-                <li><a href="#">Вход</a></li>
-                <li><a href="#">Регистрация</a></li>
-                <li><a href="#">Список желаний: Пуст</a></li>
-            </ul>
+    <header>
+        <nav class="primary-header">
+            <a class="login" href="{% url 'users:login' %}">Вход</a>
+            <a href="{% url 'users:signin' %}">Регистрация</a>
+            <a class="wishList" href="#">Список желаний: Пуст</a>
         </nav>
     </header>
 
     {% comment %} second header {% endcomment %}
 
-    <header class="header secondary-header">
-        <nav>
-            <ul>
-                <li><a href="{% url "main:main" %}"><img class="logo" src="{% static "images/GlammerLogoImg.png" %}" alt="GLAMMER"></a></li>
-                <li class="dropdown">
-                    <button id="dropdownBtn" onclick="toggleDropdown()">
-                        <svg id="burgerIcon" viewBox="0 0 24 24">
-                            <line class="line line1" x1="3" y1="6" x2="21" y2="6"></line>
-                            <line class="line line2" x1="3" y1="12" x2="21" y2="12"></line>
-                            <line class="line line3" x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                        КАТАЛОГ
-                    </button>
-                    <nav id="dropdownContent">
-                        <ul class="category"> 
-                            <li><a href="{% url 'products:catalog' 'all' %}"><b>ВСЕ ТОВАРЫ</b></a></li>
-                            {% for category in categories %}
-                                <li>
-                                    <button class="{{ category.name }}">
-                                        {{ category.name }} (0)
-                                        <svg class="catalogArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
-                                            <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
-                                        </svg>
-                                    </button>
-                                </li>
-                            {% empty %}
-                                <p>Нет элементов!</p>
-                            {% endfor %}
-                            <li>
-                                <input id="inputText" type="text" placeholder="Поиск">
-                            </li>
-                        </ul>
-                        <ul class="subcategory">
-                            <li><a href="">Подкатегория</a></li>
-                            {% for subcategory in subcategories %}
-                                <li>
-                                    <a href="#">
-                                        {{ subcategory.name }} (0)
-                                        <svg class="catalogArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
-                                            <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
-                                        </svg>
-                                    </a>
-                                </li>
-                            {% empty %}
-                                <p>Нет элементов!</p>
-                            {% endfor %}
-                        </ul>
-                    </nav>     
-                </li>
-                <li class="centerMenu"><a href="">Галерея</a></li>
-                <li class="centerMenu"><a href="">Коллекции</a></li>
-                <li class="centerMenu"><a href="">Доставка</a></li>
-                <li class="centerMenu"><a href="">Возврат и обмен</a></li>
-                <li class="centerMenu"><a href="{% url "main:contacts" %}">Контакты</a></li>
-                <li class="cityandcart"><a href="">Ваш город: Москва</a></li>
-                <li>|</li>
-                <li>
-                    <a class="cart" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.17 22.72">
-                            <polyline class="cls-1" points="0 0 3.4 0 6.25 13.45 22.38 11.83 24.17 3.28 4.38 3.19"/>
-                            <polyline class="cls-1" points="6.37 13.56 8.29 15.91 21.02 15.68"/>
-                            <circle class="cls-1" cx="8.94" cy="20.3" r="2.43"/>
-                            <circle class="cls-1" cx="18.96" cy="20.3" r="2.43"/>
-                            <line class="cls-1" x1="9" y1="16.16" x2="9" y2="17.48"/>
-                            <line class="cls-1" x1="18.96" y1="15.91" x2="18.96" y2="17.68"/>
-                        </svg>
-                        <b>КОРЗИНА: 0</b>
-                    </a>
-                </li>
-            </ul>
+    <header>
+        <nav class="secondary-header">
+            <a href="{% url "main:main" %}"><img class="logo" src="{% static "images/GlammerLogoImg.png" %}" alt="GLAMMER"></a>
+            <a id="dropdownBtn" onclick="toggleDropdownMenu('catalog')">
+                <svg id="burgerIcon" viewBox="0 0 24 24">
+                    <line class="line line1" x1="3" y1="6" x2="21" y2="6"></line>
+                    <line class="line line2" x1="3" y1="12" x2="21" y2="12"></line>
+                    <line class="line line3" x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                КАТАЛОГ
+            </a>
+            <nav id="catalog">
+                <article class="category"> 
+                    <a href="{% url 'products:catalog' 'all' %}"><b>ВСЕ ТОВАРЫ</b></a>
+                    {% for category in categories %}
+                        <a class="categoryButton" id="{{ category.name }}">
+                            {{ category.name }} &#40;0&#41;
+                            <svg class="catalogArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
+                                <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
+                            </svg>
+                        </a>
+                    {% empty %}
+                        <p>Нет элементов!</p>
+                    {% endfor %}
+                        <input id="inputText" type="search" placeholder="Поиск">
+                </article>
+                <article class="subcategory">
+                    <a href="">Подкатегория</a>
+                    {% for subcategory in subcategories %}
+                        <a href="#">
+                            {{ subcategory.name }} &#40;0&#41;
+                            <svg class="catalogArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
+                                <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
+                            </svg>
+                        </a>
+                    {% empty %}
+                        <p>Нет элементов!</p>
+                    {% endfor %}
+                </article>     
+            </nav>
+            <nav class="centerMenu">
+                <a class="item" href="">Галерея</a>
+                <a class="item" href="">Коллекции</a>
+                <a class="item" href="">Доставка</a>
+                <a class="item" href="">Возврат и обмен</a>
+                <a class="item" href="{% url "main:contacts" %}">Контакты</a>
+            </nav>
+            <a class="cityandcart" onclick="toggleDropdownMenu('cityMenu')">Ваш город: <span id="currentCity">Москва</span></a>
+            <nav id="cityMenu">
+                <a class="dropdown-item" onclick="changeCity('Москва')">Москва</a>
+                <a class="dropdown-item" onclick="changeCity('Московская область')">Московская область</a>
+            </nav>
+            |
+            <a class="cart" href="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.78494 23.72197">
+                    <polyline class="cls-1" points="0 0.5 3.404 0.5 6.255 13.947 22.383 12.33 24.17 3.777 4.383 3.691"/>
+                    <polyline class="cls-1" points="6.372 14.064 8.285 16.415 21.021 16.178"/>
+                    <circle class="cls-1" cx="8.93617" cy="20.79644" r="2.42553"/>
+                    <circle class="cls-1" cx="18.95745" cy="20.79644" r="2.42553"/>
+                    <line class="cls-1" x1="9" y1="16.65957" x2="9" y2="17.98404"/>
+                    <line class="cls-1" x1="18.95745" y1="16.41489" x2="18.95745" y2="18.17553"/>
+                </svg>
+                <b>КОРЗИНА: 0</b>
+            </a>
         </nav>
     </header>
     
@@ -108,31 +100,35 @@
     {% comment %} footer {% endcomment %}
 
     <footer>
-        <button class="footerToggleMenu" onclick="info">Информация</button>
-        <nav class="footerMenu">
-            <ul>
-                <li><a href="#">Доставка и оплата</a></li>
-                <li><a href="#">Политика конфедециальности</a></li>
-                <li><a href="#">Оферта</a></li>
-                <li><a href="#">Контакты</a></li>
-            </ul>
-        </nav> 
-        <button class="footerToggleMenu" onclick="cabinet">Личный кабинет</button>
-        <nav class="footerMenu">
-            <ul>
-                <li><a href="#">Вход</a></li>
-                <li><a href="#">Регистрация</a></li>
-                <li><a href="#">Забыли пароль?</a></li>
-            </ul>
-        </nav> 
-        <button class="footerToggleMenu" onclick="we">Мы в соц сетях</button>
-        <nav class="footerMenu">
-            <ul>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Telegram</a></li>
-            </ul>
-        </nav>  
-        <div id="brand"><a href="{% url "admin:index" %}">GLAMMER BRAND © 2024</a></div> 
+        <section class="footerToggleMenu">
+            <a onclick="toggleDropdownMenu('infoMenu')">Информация</a>
+            <nav id="infoMenu" class="footerMenu">
+                <a href="#">Доставка и оплата</a>
+                <a href="#">Политика конфедециальности</a>
+                <a href="#">Оферта</a>
+                <a href="#">Контакты</a>
+            </nav> 
+
+            <a onclick="toggleDropdownMenu('cabinetMenu')">Личный кабинет</a>
+            <nav id="cabinetMenu" class="footerMenu">
+                <a href="{% url 'users:login' %}">Вход</a>
+                <a href="{% url 'users:signin' %}">Регистрация</a>
+                <a href="{% url 'users:recovery' %}">Забыли пароль?</a>
+            </nav> 
+
+            <a onclick="toggleDropdownMenu('socialMenu')">Мы в соц сетях</a>
+            <nav id="socialMenu" class="footerMenu">
+                <a class="socialItem" href="#">
+                    <img class="socialFoto" src="{% static "images/inst.svg" %}">
+                    Instagram
+                </a>
+                <a class="socialItem" href="#">
+                    <img class="socialFoto" src="{% static "images/tg.svg" %}">
+                    Telegram
+                </a>
+            </nav>
+        </section>  
+        <a id="brand" href="{% url "admin:index" %}">GLAMMER BRAND © 2024</a> 
     </footer>
 
     {% comment %} scripts {% endcomment %}  

@@ -1,0 +1,88 @@
+{% extends "global.html" %}
+{% load static %}
+
+{% block title %}
+    <title>GLAMMER | muslim</title>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "users/styles/signin.css" %}">
+{% endblock %}
+
+{% block main %}
+    <p class="titleMain">РЕГИСТРАЦИЯ</p>
+    <div class="form-container">
+        <form method="post" action="{% url 'users:signin' %}" class="form-elements">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="sex">Пол<span class="red">*</span></label>
+                <div class="sex">
+                    М <input type="radio" name="sex" value="М" required>
+                    Ж <input type="radio" name="sex" value="Ж" required>
+                </div>
+                {% if form.sex.errors %}
+                    <p class="signError">{{ form.sex.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_name">Имя<span class="red">*</span></label>
+                <input type="text" name="name" id="id_name" placeholder="Имя" required value="{{ form.name.value }}">
+                {% if form.name.errors %}
+                    <p class="signError">{{ form.name.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_surname">Фамилия<span class="red">*</span></label>
+                <input type="text" name="surname" id="id_surname" placeholder="Фамилия" required value="{{ form.surname.value }}">
+                {% if form.surname.errors %}
+                    <p class="signError">{{ form.surname.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_email">E-Mail<span class="red">*</span></label>
+                <input type="email" name="email" id="id_email" placeholder="E-Mail" required value="{{ form.email.value }}">
+                {% if form.email.errors %}
+                    <p class="signError">{{ form.email.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_number">Контактный телефон<span class="red">*</span></label>
+                <input type="tel" name="number" id="id_number" placeholder="Номер" required value="{{ form.number.value }}">
+                {% if form.number.errors %}
+                    <p class="signError">{{ form.number.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_date">День рождения<span class="red">*</span></label>
+                <input type="date" name="date" id="id_date" placeholder="День рождения" required value="{{ form.date.value }}">
+                {% if form.date.errors %}
+                    <p class="signError">{{ form.date.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Пароль<span class="red">*</span></label>
+                <input type="password" name="password1" id="id_password1" placeholder="Пароль" required value="{{ form.password1.value }}">
+                {% if form.password1.errors %}
+                    <p class="signError">{{ form.password1.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Пароль (ещё раз)<span class="red">*</span></label>
+                <input type="password" name="password2" id="id_password2" placeholder="Пароль (ещё раз)" required value="{{ form.password2.value }}">
+                {% if form.password2.errors %}
+                    <p class="signError">{{ form.password2.errors }}</p>
+                {% endif %}
+            </div>
+            <div class="agreement">
+                <input type="checkbox" name="agreement" required>
+                <label for="agreement"><a href="#">Переходя к оплате, я подтверждаю, что даю согласие на обработку своих персональных данных.</a></label>
+            </div>            
+            <button class="submitBtn" type="submit">Зарегистрироваться</button>
+        </form>
+        <div class="info">
+            <h3><b>Зачем нужна регистрация?</b></h3>
+            <p>&nbsp;- Зарегистрировавшись на сайте Вы сможете получить личный кабинет, что позволит Вам быстрее оформлять заказы в нашем Интернет магазине, так как вся информация о Вас будет доступна в нашем магазине и её не нужно будет повторно вносить.</p>
+        </div>
+    </div>
+{% endblock %}

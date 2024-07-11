@@ -1,14 +1,30 @@
-function toggleDropdown() {
-    var dropdownContent = document.getElementById("dropdownContent");
-    var burgerIcon = document.getElementById("burgerIcon");
+function toggleDropdownMenu(menuId) {
+    var menu = document.getElementById(menuId);
+    var computedStyle = window.getComputedStyle(menu);
 
-    // Переключение класса для анимации иконки бургера
-    burgerIcon.classList.toggle("open");
-
-    // Переключение отображения выпадающего меню
-    if (dropdownContent.style.display === "flex") {
-        dropdownContent.style.display = "none";
+    if (computedStyle.display === "flex" || computedStyle.display === "none") {
+        menu.style.display = (computedStyle.display === "flex") ? "none" : "flex";
     } else {
-        dropdownContent.style.display = "flex";
+        menu.style.display = "flex";
     }
+
+    // Переключение анимации иконки бургера, если menuId равен 'catalog'
+    if (menuId === "catalog") {
+        var burgerIcon = document.getElementById("burgerIcon");
+        burgerIcon.classList.toggle("open");
+    }
+
+    function changeCity(cityName) {
+        if (cityName === 'Москва') {
+            document.getElementById('currentCity').innerText = cityName;
+            document.getElementById('cityMenu').style.display = 'none';
+        } else if (cityName === 'Московская область') {
+            document.getElementById('currentCity').innerText = 'Моск. обл.';
+            document.getElementById('cityMenu').style.display = 'none';
+        }
+    }
+    
+    // Публикация функций, чтобы они были доступны из других скриптов
+    window.toggleDropdownMenu = toggleDropdownMenu;
+    window.changeCity = changeCity;
 }

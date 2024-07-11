@@ -1,31 +1,35 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
+from django.db.models import Count
 
-
-from .models import Product
-
+from .models import Product, Categories
 
 
 def catalog(request, categorySlug):
-    if categorySlug == "all":
+    if categorySlug == "all" or not categorySlug:
         products = Product.objects.all()
     else:
-        products = get_object_or_404(Product.objects.filter(category__slug=categorySlug))
-    #
+        category = get_object_or_404(Categories, slug=categorySlug)
+        products = Product.objects.filter(category=category)
+    
+    # Пагинация
     paginator = Paginator(products, 3)
-    currentPage = paginator.page()
-    #
+    page_number = request.GET.get('page')
+    currentPage = paginator.get_page(page_number)
+    
+    # Получить количество товаров для каждой категории
+    categoriesWithProductCount = Categories.objects.annotate(productCount=Count('product'))
+
     context = {
         "products": currentPage,
+        "categoriesWithProductCount": categoriesWithProductCount,
     }
     return render(request, 'products/catalog.html', context)
 
 
-
 def product(request, productId):
-    product = Product.objects.get(id=productId) 
+    product = get_object_or_404(Product, id=productId)
     context = {
         "product": product,
     }
     return render(request, 'products/product.html', context)
-

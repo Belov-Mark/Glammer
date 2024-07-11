@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %}
-    <title>GLAMMER | {% block page_title %}Muslim{% endblock %}</title>
+    <title>GLAMMER | {% block page_title %}muslim{% endblock %}</title>
 {% endblock %}
 
 {% block css %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static "main/styles/main.css" %}">
+
 {% endblock %}
 
 {% block main %}
@@ -16,16 +16,16 @@
         <article class="slider" id="slider1">
             <div class="slides">
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-13.jpg" %}" alt="Image 1">
+                    <img src="{% static "main/images/13.jpg" %}" alt="Image 1">
                 </div>
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-14.jpg" %}" alt="Image 2">
+                    <img src="{% static "main/images/14.jpg" %}" alt="Image 2">
                 </div>
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-13.jpg" %}" alt="Image 3">
+                    <img src="{% static "main/images/13.jpg" %}" alt="Image 3">
                 </div>
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-14.jpg" %}" alt="Image 4">
+                    <img src="{% static "main/images/14.jpg" %}" alt="Image 4">
                 </div>
             </div>
             <button class="prev" onclick="prevSlide(1)">&#10094;</button>
@@ -40,16 +40,16 @@
         <article class="slider" id="slider2">
             <div class="slides">
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-14.jpg" %}" alt="Image 1">
+                    <img src="{% static "main/images/14.jpg" %}" alt="Image 1">
                 </div>
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-13.jpg" %}" alt="Image 2">
+                    <img src="{% static "main/images/13.jpg" %}" alt="Image 2">
                 </div>
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-14.jpg" %}" alt="Image 3">
+                    <img src="{% static "main/images/14.jpg" %}" alt="Image 3">
                 </div>
                 <div class="slide">
-                    <img src="{% static "main/images/САЙТ ГЛЭММЕР-13.jpg" %}" alt="Image 4">
+                    <img src="{% static "main/images/13.jpg" %}" alt="Image 4">
                 </div>
             </div>
             <button class="prev" onclick="prevSlide(2)">&#10094;</button>
@@ -67,7 +67,7 @@
         <p href="#" class="newCaps">НОВИНКИ</p>
         <a href="#" class="new">Все новинки</a>
     </section>
-    <section class="novinki">
+    <section class="catalog">
         {% for newProduct in newProducts %}
         <article class="item">
             {% if newProduct.image %}
@@ -80,7 +80,7 @@
                     <img src="{{ newProduct.image.url }}" alt="{{ newProduct.name }}">
                 {% endif %}
             {% else %}
-                <img src="main/images/default.jpg" alt="Изображения нет!">
+                <img src="{% static "product_images/foto.png" %}" alt="Изображения нет!">
             {% endif %}
             <div class="description">
                 <a href="{% url "catalog:product" newProduct.id %}">{{ newProduct.name }}</a>
@@ -118,7 +118,7 @@
         <p href="#" class="newCaps discount">СКИДКА!</p>
         <a href="#">Все товары со скидкой</a>
     </section>
-    <section class="novinki">
+    <section class="catalog">
         {% for discountProduct in discountProducts %}
             <article class="item">
                 {% if discountProduct.image %}
@@ -131,7 +131,7 @@
                         <img src="{{ discountProduct.image.url }}" alt="{{ discountProduct.name }}">
                     {% endif %}
                 {% else %}
-                    <img src="main/images/default.jpg" alt="Изображения нет!">
+                    <img src="{% static "product_images/foto.png" %}" alt="Изображения нет!">
                 {% endif %}
                 <div class="description">
                     <a href="{% url "catalog:product" discountProduct.id %}">{{ discountProduct.name }}</a>
@@ -164,6 +164,9 @@
                 <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
             </svg>
         </a>
+    </div>
+    <div>
+
     </div>
 
 {% endblock %}

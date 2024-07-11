@@ -1,0 +1,27 @@
+{% extends "global.html" %}
+{% load static %}
+
+{% block title %}
+    <title>GLAMMER | muslim</title>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "users/styles/recovery.css" %}">
+{% endblock %}
+
+{% block main %}
+    <p class="titleMain">ВОССТАНОВЛЕНИЕ ПАРОЛЯ</p>
+    <div class="form-container">
+        <form method="post" class="form-elements">
+            <div class="form-group">
+                <label for="email">E-Mail<span class="red">*</span></label>
+                <input type="email" name="email" placeholder="E-Mail" required autofocus>
+            </div>
+            <button class="submitBtn" onclick="submitBtn">Восстановить пароль</button>
+        </form>
+        <div class="info">
+            <p>Введите e-mail, который указывали при регистрации. Через несколько минут на него придет письмо со ссылкой для восстановления пароля.</p>
+        </div>
+    </div>
+{% endblock %}
