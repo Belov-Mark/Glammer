@@ -24,8 +24,8 @@
             <img src="{% static "main/images/default.jpg" %}" alt="Изображения нет!">
         {% endif %}
         <div class="description">
-            <a href="{% url "catalog:product" product.productId %}">{{ product.name }}</a>
-            <p class="productId">{{ product.productId }}</p>
+            <a href="{% url "products:product" product.id %}">{{ product.name }}</a>
+            <p class="productId">{{ product.id }}</p>
             <div class="colors">
                 <button>Беж</button>
                 <button>Чёрный</button>

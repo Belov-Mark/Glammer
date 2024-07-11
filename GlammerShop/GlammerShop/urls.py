@@ -9,7 +9,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
-    path('catalog/', include('products.urls', namespace='catalog')),
+    path('products/', include('products.urls', namespace='products')),
     path('user/', include('users.urls', namespace='users')),
 ]
 

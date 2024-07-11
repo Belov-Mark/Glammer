@@ -48,13 +48,10 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ("id",)
-
+    
     def __str__(self):
-        return f'{self.name}; Количество: {self.quantity}; Цена: {self.price}; ID: {self.productId()}'
-    
-    def productId(self):
-        return f'{self.id:06}'
-    
+        return f'{self.name} ({self.id})'
+
     def sellPrice(self):
         if self.discount:
             number = self.price - self.price * self.discount / 100

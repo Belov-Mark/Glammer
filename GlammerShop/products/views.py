@@ -28,8 +28,22 @@ def catalog(request, categorySlug):
 
 
 def product(request, productId):
-    product = get_object_or_404(Product, id=productId)
+    product = get_object_or_404(Product, id=id)
     context = {
         "product": product,
     }
     return render(request, 'products/product.html', context)
+
+def news(request):
+    newProducts = Product.objects.all().order_by('-created_at')[:6]
+    context = {
+        "newProducts": newProducts,
+    }
+    return render(request, 'products/news.html', context)
+
+def sale(request):
+    saleProducts = Product.objects.filter(discount__gt=0)
+    context = {
+        "saleProducts": saleProducts,
+    }
+    return render(request, 'products/sale.html', context)

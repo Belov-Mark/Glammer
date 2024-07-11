@@ -83,8 +83,8 @@
                 <img src="{% static "product_images/foto.png" %}" alt="Изображения нет!">
             {% endif %}
             <div class="description">
-                <a href="{% url "catalog:product" newProduct.id %}">{{ newProduct.name }}</a>
-                <p class="productId">{{ newProduct.productId }}</p>
+                <a href="{% url "products:product" newProduct.id %}">{{ newProduct.name }}</a>
+                <p class="productId">{{ newProduct.id }}</p>
                 <div class="colors">
                     <button>Беж</button>
                     <button>Чёрный</button>
@@ -106,7 +106,7 @@
         {% endfor %}
     </section>
     <section class="allNew">
-        <a href="" class="buttonNew">
+        <a href="{% url 'products:news' %}" class="buttonNew">
             Посмотреть все новинки
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
                 <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
@@ -119,34 +119,34 @@
         <a href="#">Все товары со скидкой</a>
     </section>
     <section class="catalog">
-        {% for discountProduct in discountProducts %}
+        {% for saleProduct in saleProducts %}
             <article class="item">
-                {% if discountProduct.image %}
-                    {% if discountProduct.discount %}
+                {% if saleProduct.image %}
+                    {% if saleProduct.discount %}
                         <div class="container">
-                            <img src="{{ discountProduct.image.url }}" alt="{{ discountProduct.name }}" class="image">
-                            <div class="text">СКИДКА {{ discountProduct.discount }}%</div>
+                            <img src="{{ saleProduct.image.url }}" alt="{{ saleProduct.name }}" class="image">
+                            <div class="text">СКИДКА {{ saleProduct.discount }}%</div>
                         </div>
                     {% else %}
-                        <img src="{{ discountProduct.image.url }}" alt="{{ discountProduct.name }}">
+                        <img src="{{ saleProduct.image.url }}" alt="{{ saleProduct.name }}">
                     {% endif %}
                 {% else %}
                     <img src="{% static "product_images/foto.png" %}" alt="Изображения нет!">
                 {% endif %}
                 <div class="description">
-                    <a href="{% url "catalog:product" discountProduct.id %}">{{ discountProduct.name }}</a>
-                    <p class="productId">{{ discountProduct.productId }}</p>
+                    <a href="{% url "products:product" saleProduct.id %}">{{ saleProduct.name }}</a>
+                    <p class="productId">{{ saleProduct.id }}</p>
                     <div class="colors">
                         <button>Беж</button>
                         <button>Чёрный</button>
                     </div>
-                    {% if discountProduct.discount %}
+                    {% if saleProduct.discount %}
                         <div class="priceForSell">
-                            <p class="oldPrice">{{ discountProduct.price }} руб.</p>
-                            <p>{{ discountProduct.sellPrice }} руб.</p>
+                            <p class="oldPrice">{{ saleProduct.price }} руб.</p>
+                            <p>{{ saleProduct.sellPrice }} руб.</p>
                         </div>
                     {% else %}
-                        <p>{{ discountProduct.price }} руб.</p>
+                        <p>{{ saleProduct.price }} руб.</p>
                     {% endif %}
                     
                     <button class="cartButton">Добавить в корзину</button>
@@ -158,7 +158,7 @@
         
     </section>
     <div class="allNew">
-        <a href="" class="buttonNew">
+        <a href="{% url 'products:sale' %}" class="buttonNew">
             Посмотреть все товары со скидкой
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
                 <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>

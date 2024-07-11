@@ -18,8 +18,8 @@
             <div class="form-group">
                 <label for="sex">Пол<span class="red">*</span></label>
                 <div class="sex">
-                    М <input type="radio" name="sex" value="М" required>
-                    Ж <input type="radio" name="sex" value="Ж" required>
+                    М <input type="radio" name="sex" value="M" required {% if form.sex.value == 'М' %}checked{% endif %}>
+                    Ж <input type="radio" name="sex" value="F" required {% if form.sex.value == 'Ж' %}checked{% endif %}>
                 </div>
                 {% if form.sex.errors %}
                     <p class="signError">{{ form.sex.errors }}</p>
@@ -27,49 +27,49 @@
             </div>
             <div class="form-group">
                 <label for="id_name">Имя<span class="red">*</span></label>
-                <input type="text" name="name" id="id_name" placeholder="Имя" required value="{{ form.name.value }}">
+                <input type="text" name="name" id="id_name" placeholder="Имя" required value="{{ form.name.value|default_if_none:'' }}">
                 {% if form.name.errors %}
                     <p class="signError">{{ form.name.errors }}</p>
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="id_surname">Фамилия<span class="red">*</span></label>
-                <input type="text" name="surname" id="id_surname" placeholder="Фамилия" required value="{{ form.surname.value }}">
+                <input type="text" name="surname" id="id_surname" placeholder="Фамилия" required value="{{ form.surname.value|default_if_none:'' }}">
                 {% if form.surname.errors %}
                     <p class="signError">{{ form.surname.errors }}</p>
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="id_email">E-Mail<span class="red">*</span></label>
-                <input type="email" name="email" id="id_email" placeholder="E-Mail" required value="{{ form.email.value }}">
+                <input type="email" name="email" id="id_email" placeholder="E-Mail" required value="{{ form.email.value|default_if_none:'' }}">
                 {% if form.email.errors %}
                     <p class="signError">{{ form.email.errors }}</p>
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="id_number">Контактный телефон<span class="red">*</span></label>
-                <input type="tel" name="number" id="id_number" placeholder="Номер" required value="{{ form.number.value }}">
+                <input type="tel" name="number" id="id_number" placeholder="Номер" required value="{{ form.number.value|default_if_none:'' }}">
                 {% if form.number.errors %}
                     <p class="signError">{{ form.number.errors }}</p>
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="id_date">День рождения<span class="red">*</span></label>
-                <input type="date" name="date" id="id_date" placeholder="День рождения" required value="{{ form.date.value }}">
+                <input type="date" name="date" id="id_date" placeholder="День рождения" required value="{{ form.date.value|default_if_none:'' }}">
                 {% if form.date.errors %}
                     <p class="signError">{{ form.date.errors }}</p>
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="id_password1">Пароль<span class="red">*</span></label>
-                <input type="password" name="password1" id="id_password1" placeholder="Пароль" required value="{{ form.password1.value }}">
+                <input type="password" name="password1" id="id_password1" placeholder="Пароль" required value="{{ form.password1.value|default_if_none:'' }}">
                 {% if form.password1.errors %}
                     <p class="signError">{{ form.password1.errors }}</p>
                 {% endif %}
             </div>
             <div class="form-group">
                 <label for="id_password2">Пароль (ещё раз)<span class="red">*</span></label>
-                <input type="password" name="password2" id="id_password2" placeholder="Пароль (ещё раз)" required value="{{ form.password2.value }}">
+                <input type="password" name="password2" id="id_password2" placeholder="Пароль (ещё раз)" required value="{{ form.password2.value|default_if_none:'' }}">
                 {% if form.password2.errors %}
                     <p class="signError">{{ form.password2.errors }}</p>
                 {% endif %}

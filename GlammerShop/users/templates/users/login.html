@@ -16,9 +16,12 @@
         <form method="post" class="form-elements" action="{% url 'users:login' %}">
             <p class="bioMain">- У меня уже есть учётная запись</p>
             {% csrf_token %}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
             <div class="form-group">
                 <label for="id_email">E-Mail<span class="red">*</span></label>
-                <input type="email" name="username" id="id_email" placeholder="E-Mail" value="{{ form.username.value }}" required autofocus>
+                <input type="email" name="username" id="id_email" placeholder="E-Mail" value="{{ form.username.value|default_if_none:'' }}" required autofocus>
                 {% if form.username.errors %}
                     <p class="signError">{{ form.username.errors }}</p>
                 {% endif %}

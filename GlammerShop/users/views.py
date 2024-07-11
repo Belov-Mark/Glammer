@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from .forms import UserLoginForm, UserRegisterForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -14,7 +15,10 @@ def login(request):
             user = auth.authenticate(username=email, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('main:main')
+                if request.POST.get('next', None):
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect('main:main')
     else:
         form = UserLoginForm()
     context = {
@@ -26,10 +30,9 @@ def signin(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.instance
+            user = form.save()
             auth.login(request, user)
-            return redirect('users:login')
+            return redirect('main:main')
     else:
         form = UserRegisterForm()
     context = {
@@ -41,10 +44,12 @@ def recovery(request):
     context = {}
     return render(request, 'users/recovery.html', context)
 
+@login_required
 def profile(request):
     context = {}
     return render(request, 'users/profile.html', context)
 
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect('main:index')
