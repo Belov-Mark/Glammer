@@ -17,21 +17,6 @@ body {
 
 
 
-/* кнопки */
-button {
-    border: none;
-    background: none;
-    font: inherit;
-    cursor: pointer;
-    color: inherit;
-}
-
-button:hover {
-    color:rgba(255, 255, 255, 0.7);
-}
-
-
-
 /* ссылки */
 a {
     text-decoration: none;
@@ -99,7 +84,7 @@ header {
     display: flex;
     align-items: center;
     column-gap: 7px;
-    margin: 0px 90px;
+    margin: 0px 4vw;
 }
 
 #burgerIcon {
@@ -173,12 +158,10 @@ header {
     fill: rgba(255, 255, 255, 0.7);
 }
 
-
-
 #inputText {
     background-color: rgba(255, 255, 255, 0.8);
-    width: 95%;
-    height: 6px;
+    width: 100%;
+    height: 40px;
     padding: 17px;
     font-size: inherit;
     border: 0;
@@ -195,7 +178,8 @@ header {
 .centerMenu {
     display: flex;
     flex-direction: row;
-    column-gap: 60px;
+    column-gap: 3vw;
+    margin-right: 3.5vw;
 }
 
 .item {
@@ -233,6 +217,10 @@ header {
 
 .cart:hover b {
     color: rgba(255, 255, 255, 0.7);
+}
+
+.cityandcart, #cityMenu, .cart {
+    text-wrap: nowrap;
 }
 
 .cart {
@@ -335,6 +323,7 @@ footer {
     right: 30px;
     bottom: 40px;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .mes svg {
@@ -365,3 +354,31 @@ footer {
 .mes:hover .cls-3-mes {
     fill: rgba(0, 0, 0, 0.5)
 }
+/*
+.mesConteiner {
+    display: none;
+    margin-top: 20px;
+    top: calc(100% + 10px);
+    position: absolute;
+    right: 30px;
+}
+
+.mesImages {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: 50px;
+}
+
+.first {
+    position: absolute;
+    right: 30px;
+    bottom: calc(4.75vw + 110px)
+}
+
+.second {
+    position: absolute;
+    right: 30px;
+    bottom: calc(4.75vw + 50px);
+}
+*/

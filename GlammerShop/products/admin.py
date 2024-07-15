@@ -7,11 +7,13 @@ from products.models import Categories, Product, Subcategory
 class CategoriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name',)
+    search_fields = ('name',)
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name',)
+    search_fields = ('name',)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

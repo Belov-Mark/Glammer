@@ -28,8 +28,8 @@
                     <img src="{% static "main/images/14.jpg" %}" alt="Image 4">
                 </div>
             </div>
-            <button class="prev" onclick="prevSlide(1)">&#10094;</button>
-            <button class="next" onclick="nextSlide(1)">&#10095;</button>
+            <a class="prev" onclick="prevSlide(1)">&#10094;</a>
+            <a class="next" onclick="nextSlide(1)">&#10095;</a>
             <div class="dots">
                 <span class="dot" onclick="currentSlide(1, 0)"></span>
                 <span class="dot" onclick="currentSlide(1, 1)"></span>
@@ -52,8 +52,8 @@
                     <img src="{% static "main/images/13.jpg" %}" alt="Image 4">
                 </div>
             </div>
-            <button class="prev" onclick="prevSlide(2)">&#10094;</button>
-            <button class="next" onclick="nextSlide(2)">&#10095;</button>
+            <a class="prev" onclick="prevSlide(2)">&#10094;</a>
+            <a class="next" onclick="nextSlide(2)">&#10095;</a>
             <div class="dots">
                 <span class="dot" onclick="currentSlide(2, 0)"></span>
                 <span class="dot" onclick="currentSlide(2, 1)"></span>
@@ -64,8 +64,8 @@
     </section>
 
     <section>
-        <p href="#" class="newCaps">НОВИНКИ</p>
-        <a href="#" class="new">Все новинки</a>
+        <p href="#" class="titleSection">НОВИНКИ</p>
+        <a href="#" class="paragrafSection">Все новинки</a>
     </section>
     <section class="catalog">
         {% for newProduct in newProducts %}
@@ -74,20 +74,20 @@
                 {% if newProduct.discount %}
                     <div class="container">
                         <img src="{{ newProduct.image.url }}" alt="{{ newProduct.name }}" class="image">
-                        <div class="text">СКИДКА {{ newProduct.discount }}%</div>
+                        <div class="discount">СКИДКА {{ newProduct.discount }}%</div>
                     </div>
                 {% else %}
                     <img src="{{ newProduct.image.url }}" alt="{{ newProduct.name }}">
                 {% endif %}
             {% else %}
-                <img src="{% static "product_images/foto.png" %}" alt="Изображения нет!">
+                <img src="{% static "images/foto.webp" %}" alt="Изображения нет!">
             {% endif %}
             <div class="description">
                 <a href="{% url "products:product" newProduct.id %}">{{ newProduct.name }}</a>
                 <p class="productId">{{ newProduct.id }}</p>
                 <div class="colors">
-                    <button>Беж</button>
-                    <button>Чёрный</button>
+                    <a>Беж</a>
+                    <a>Чёрный</a>
                 </div>
                 {% if newProduct.discount %}
                     <div class="priceForSell">
@@ -98,15 +98,15 @@
                     <p>{{ newProduct.price }} руб.</p>
                 {% endif %}
                 
-                <button class="cartButton">Добавить в корзину</button>
+                <a class="cartButton">Добавить в корзину</a>
             </div>
         </article>
         {% empty %}
             <div class="error"><h1>Нет элементов для отображения!</h1></div>
         {% endfor %}
     </section>
-    <section class="allNew">
-        <a href="{% url 'products:news' %}" class="buttonNew">
+    <section class="all">
+        <a href="{% url 'products:news' %}" class="buttonAll">
             Посмотреть все новинки
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
                 <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
@@ -115,8 +115,8 @@
     </section>
 
     <section>
-        <p href="#" class="newCaps discount">СКИДКА!</p>
-        <a href="#">Все товары со скидкой</a>
+        <p href="#" class="titleSection titleDiscount">СКИДКА!</p>
+        <a href="#" class="paragrafSection">Все товары со скидкой</a>
     </section>
     <section class="catalog">
         {% for saleProduct in saleProducts %}
@@ -125,7 +125,7 @@
                     {% if saleProduct.discount %}
                         <div class="container">
                             <img src="{{ saleProduct.image.url }}" alt="{{ saleProduct.name }}" class="image">
-                            <div class="text">СКИДКА {{ saleProduct.discount }}%</div>
+                            <div class="discount">СКИДКА {{ saleProduct.discount }}%</div>
                         </div>
                     {% else %}
                         <img src="{{ saleProduct.image.url }}" alt="{{ saleProduct.name }}">
@@ -137,8 +137,8 @@
                     <a href="{% url "products:product" saleProduct.id %}">{{ saleProduct.name }}</a>
                     <p class="productId">{{ saleProduct.id }}</p>
                     <div class="colors">
-                        <button>Беж</button>
-                        <button>Чёрный</button>
+                        <a>Беж</a>
+                        <a>Чёрный</a>
                     </div>
                     {% if saleProduct.discount %}
                         <div class="priceForSell">
@@ -149,7 +149,7 @@
                         <p>{{ saleProduct.price }} руб.</p>
                     {% endif %}
                     
-                    <button class="cartButton">Добавить в корзину</button>
+                    <a class="cartButton">Добавить в корзину</a>
                 </div>
             </article>
         {% empty %}
@@ -157,8 +157,8 @@
         {% endfor %}
         
     </section>
-    <div class="allNew">
-        <a href="{% url 'products:sale' %}" class="buttonNew">
+    <div class="all">
+        <a href="{% url 'products:sale' %}" class="buttonAll">
             Посмотреть все товары со скидкой
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
                 <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>

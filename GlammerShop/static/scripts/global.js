@@ -1,5 +1,11 @@
 function toggleDropdownMenu(menuId) {
     var menu = document.getElementById(menuId);
+    
+    if (!menu) {
+        console.error('Menu element not found.');
+        return;
+    }
+
     var computedStyle = window.getComputedStyle(menu);
 
     if (computedStyle.display === "flex" || computedStyle.display === "none") {
@@ -8,23 +14,26 @@ function toggleDropdownMenu(menuId) {
         menu.style.display = "flex";
     }
 
-    // Переключение анимации иконки бургера, если menuId равен 'catalog'
+    // Toggle burger icon animation if menuId is 'catalog'
     if (menuId === "catalog") {
         var burgerIcon = document.getElementById("burgerIcon");
-        burgerIcon.classList.toggle("open");
-    }
-
-    function changeCity(cityName) {
-        if (cityName === 'Москва') {
-            document.getElementById('currentCity').innerText = cityName;
-            document.getElementById('cityMenu').style.display = 'none';
-        } else if (cityName === 'Московская область') {
-            document.getElementById('currentCity').innerText = 'Моск. обл.';
-            document.getElementById('cityMenu').style.display = 'none';
+        if (burgerIcon) {
+            burgerIcon.classList.toggle("open");
         }
     }
-    
-    // Публикация функций, чтобы они были доступны из других скриптов
-    window.toggleDropdownMenu = toggleDropdownMenu;
-    window.changeCity = changeCity;
 }
+
+
+function changeCity(cityName) {
+    document.getElementById('currentCity').innerText = cityName;
+    var cityMenu = document.getElementById('cityMenu');
+    if (cityMenu) {
+        cityMenu.style.display = 'none';
+    } else {
+        console.error('City menu element not found.');
+    }
+}
+
+// Publish functions to make them accessible from other scripts
+window.toggleDropdownMenu = toggleDropdownMenu;
+window.changeCity = changeCity;

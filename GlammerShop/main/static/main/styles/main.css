@@ -76,13 +76,13 @@
 
 
 /* новинки */
-.newCaps {
+.titleSection {
     font-size: 1.5vw;
     margin-right: 0.5vw;
     display: inline;
 }
 
-.new {
+.paragrafSection {
     font-size: 1vw;
 }
 
@@ -112,7 +112,7 @@
     color: rgba(255, 255, 255, 0.5)
 }
 
-.colors button {
+.colors a {
     border: 1px #fff solid;
     border-radius: 5px;
     padding: 0px 3px;
@@ -123,7 +123,7 @@
     justify-content: center;
     align-items: center;
     margin: 5px;
-    gap: 5px;
+    column-gap: 5px;
 }
 
 .oldPrice {
@@ -137,14 +137,14 @@
     padding: 0px 4px;
 }
 
-.allNew {
+.all {
     width: 100%;
     text-align: center;
     align-items: center;
     margin-bottom: 90px;
 }
 
-.buttonNew {
+.buttonAll {
     font-size: 1.2vw;
     display: inline-flex;
     color: rgba(255, 255, 255, 0.4);
@@ -154,7 +154,7 @@
     padding: 3px 7px;
 }
 
-.buttonNew svg {
+.buttonAll svg {
     fill: rgba(255, 255, 255, 0.4);
     opacity: 0.6;
     width: 1vw;
@@ -162,14 +162,14 @@
     padding-top: 4px;
 }
 
-.buttonNew:hover svg {
+.buttonAll:hover svg {
     fill: rgba(255, 255, 255, 0.7)
 }
 
 
 
 /* скидки */
-.discount {
+.titleDiscount {
     background-color: #fff;
     color: #FF0000;
     border-radius: 6px;
@@ -191,7 +191,7 @@
     display: block;
 }
 
-.text {
+.discount {
     position: absolute;
     top: 10px;
     right: 10px;

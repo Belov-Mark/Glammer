@@ -7,7 +7,7 @@ from .utils import generate_unique_id
 
 class Categories(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name='Название')
-    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
+    slug = models.SlugField(max_length=200, unique=True, verbose_name='URL')
 
     class Meta:
         db_table = 'category'
@@ -20,7 +20,7 @@ class Categories(models.Model):
 
 class Subcategory(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name='Название')
-    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
+    slug = models.SlugField(max_length=200, unique=True, verbose_name='URL')
     category = models.ForeignKey(to=Categories, on_delete=models.CASCADE, verbose_name='Категория')
 
     class Meta:
