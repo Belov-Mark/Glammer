@@ -1,4 +1,4 @@
-from random import randint
+from random import choices
 
 def generate_unique_id():
-    return str(randint(100000, 999999))
+    return str(choices('0123456789', k=6))

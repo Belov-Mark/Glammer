@@ -8,16 +8,11 @@ class User(AbstractUser):
     name = models.CharField(max_length=30, verbose_name='Имя')
     surname = models.CharField(max_length=30, verbose_name='Фамилия')
     number = models.CharField(max_length=15, verbose_name='Контактный телефон')
-    date = models.DateField(verbose_name='Дата рождения', default=date(2000, 1, 1))
+    date = models.DateField(verbose_name='Дата рождения')
     sex = models.CharField(max_length=1, verbose_name='Пол', choices=(('M', 'Мужской'), ('F', 'Женский')))
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username',
-                       'name',
-                       'surname',
-                       'number', 
-                       'date',
-                       'sex']
+    REQUIRED_FIELDS = ['username', 'name', 'surname', 'number',  'date', 'sex']
 
     class Meta:
         db_table = 'user'

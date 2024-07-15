@@ -14,12 +14,20 @@
     <p class="titleMain">ВОССТАНОВЛЕНИЕ ПАРОЛЯ</p>
     <div class="form-container">
         <form method="post" class="form-elements">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="email">E-Mail<span class="red">*</span></label>
                 <input type="email" name="email" placeholder="E-Mail" required autofocus>
             </div>
             <button class="submitBtn" onclick="submitBtn">Восстановить пароль</button>
         </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="info">
             <p>Введите e-mail, который указывали при регистрации. Через несколько минут на него придет письмо со ссылкой для восстановления пароля.</p>
         </div>

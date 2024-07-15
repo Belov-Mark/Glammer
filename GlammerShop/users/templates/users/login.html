@@ -36,7 +36,13 @@
             <a class="recovery" href="{% url 'users:recovery' %}">Забыли пароль?</a>
             <button class="submitBtn" type="submit">Вход</button>
         </form>
-        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="info">
             <h3><b>Я - новый покупатель</b></h3>
             <p>&nbsp;- Регистрация на сайте позволит быстро оформлять заказы, управлять заказами через личный кабинет, в полном объеме использовать возможности нашего интернет магазина.</p>

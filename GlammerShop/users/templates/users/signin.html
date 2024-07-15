@@ -80,6 +80,13 @@
             </div>            
             <button class="submitBtn" type="submit">Зарегистрироваться</button>
         </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <div class="info">
             <h3><b>Зачем нужна регистрация?</b></h3>
             <p>&nbsp;- Зарегистрировавшись на сайте Вы сможете получить личный кабинет, что позволит Вам быстрее оформлять заказы в нашем Интернет магазине, так как вся информация о Вас будет доступна в нашем магазине и её не нужно будет повторно вносить.</p>

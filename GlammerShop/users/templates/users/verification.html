@@ -1,0 +1,35 @@
+{% extends "global.html" %}
+{% load static %}
+
+{% block title %}
+    <title>GLAMMER | muslim</title>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "users/styles/verification.css" %}">
+{% endblock %}
+
+{% block main %}
+    <p class="titleMain">ПОДТВЕРЖДЕНИЕ ПОЧТОВОГО АДРЕСА</p>
+    <div class="form-container">
+        <form method="post" class="form-elements">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_code">Код подтверждения<span class="red">*</span></label>
+                <input type="text" name="code" id="id_code" pattern="[0-9]*" inputmode="numeric" maxlength="8" placeholder="Код подтверждения" required autofocus>
+            </div>
+            <button class="submitBtn" type="submit">Подтвердить</button>
+        </form>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="info">
+            <p>Введите код для того, чтобы подтвердить почтовый алрес, который указывали при регистрации. Код остаётся дейстивтелен тольько 30 минут после отправки на почту.</p>
+        </div>
+    </div>
+{% endblock %}
