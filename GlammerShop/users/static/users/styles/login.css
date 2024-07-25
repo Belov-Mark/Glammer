@@ -76,6 +76,7 @@ form {
 .buttonForInfo {
     display: inline-flex;
     margin-top: 10px;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 10px 15px;
     border-radius: 10px;
@@ -89,8 +90,10 @@ form {
 }
 
 .submitBtn {
+    display: inline-flex;
     margin-top: 15px;
     margin-left: 130px;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 10px 20px;
     border-radius: 10px;

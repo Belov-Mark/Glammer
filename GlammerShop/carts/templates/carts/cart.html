@@ -1,0 +1,93 @@
+{% extends "global.html" %}
+{% load static %}
+
+{% block title %}
+    <title>GLAMMER | muslim</title>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'carts/styles/cart.css' %}">
+{% endblock %}
+
+{% block main %}
+    <p class="titleForCart">КОРЗИНА</p>
+    <table>
+        <thead>
+            <tr>
+                <td>Товар</td>
+                <td>Цена за ед.</td>
+                <td>Количество</td>
+                <td>Стоимость</td>
+                <td>
+                    <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
+                        <circle cx="12.85106" cy="12.85106" r="12.85106"/>
+                        <line x1="6.88298" y1="6.88298" x2="18.81915" y2="18.81915"/>
+                        <line x1="18.81915" y1="6.88298" x2="6.88298" y2="18.81915"/>
+                    </svg>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart.items.all %}
+                <tr>
+                    <td class="fotoAndInfo">
+                        {% if product.image %}
+                            {% if product.discount %}
+                                <div class="container">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image" loading="lazy">
+                                    <div class="discount">СКИДКА {{ product.discount }}%</div>
+                                </div>
+                            {% else %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                            {% endif %}
+                        {% else %}
+                            <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
+                        {% endif %}
+                        <div class="infoForProduct">
+                            <p class="nameForProduct">{{ item.product.name }}</p>
+                            <p>Цвет: Черный</p>
+                            <p>Размер: 42</p>
+                        </div>
+                    </td>
+                    <td>
+                        {% if item.product.discount %}
+                            <div class="priceForSell">
+                                <p class="oldPrice">{{ item.product.price }} руб.</p>
+                                <p>{{ item.product.sellPrice }} руб.</p>
+                            </div>
+                        {% else %}
+                            <p>{{ item.product.price }} руб.</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <input type="number" value="{{ item.quantity }}">
+                    </td>
+                    <td>
+                        {% if item.product.discount %}
+                            <div class="priceForSell">
+                                <p>{{ item.product.sellPrice }} руб.</p>
+                            </div>
+                        {% else %}
+                            <p>{{ item.product.price }} руб.</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'carts:cart' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="remove">
+                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                            <button class="buttonClose" type="submit">
+                                <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
+                                    <circle cx="12.85106" cy="12.85106" r="12.85106"/>
+                                    <line x1="6.88298" y1="6.88298" x2="18.81915" y2="18.81915"/>
+                                    <line x1="18.81915" y1="6.88298" x2="6.88298" y2="18.81915"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+{% endblock %}

@@ -17,21 +17,21 @@
                 {% if product.image %}
                     {% if product.discount %}
                         <div class="container">
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image" loading="lazy">
                             <div class="text">СКИДКА {{ product.discount }}%</div>
                         </div>
                     {% else %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
                     {% endif %}
                 {% else %}
-                    <img src="{% static "main/images/default.jpg" %}" alt="Изображения нет!">
+                    <img src="{% static "images/foto.webp" %}" alt="Изображения нет!" loading="lazy">
                 {% endif %}
                 <div class="description">
                     <a href="{% url "products:product" product.id %}">{{ product.name }}</a>
                     <p class="productId">{{ product.id }}</p>
                     <div class="colors">
-                        <button>Беж</button>
-                        <button>Чёрный</button>
+                        <a>Беж</a>
+                        <a>Чёрный</a>
                     </div>
                     {% if product.discount %}
                         <div class="priceForSell">
@@ -48,6 +48,7 @@
         {% empty %}
             <div class="error"><h1>Нет элементов для отображения!</h1></div>
         {% endfor %}
+        {% include "pagination.html" with page=page_obj %}
         
     </section>
 {% endblock %}

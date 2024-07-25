@@ -47,6 +47,16 @@ form {
     outline: none;
 }
 
+.fieldError {
+    margin-left: 250px;
+}
+
+.errorlist li {
+    color: red;
+    font-size: 12px;
+    list-style: none;
+}
+
 .sex {
     display: flex;
     align-items: center;
@@ -122,13 +132,15 @@ form {
 }
 
 .submitBtn {
+    display: inline-flex;
     margin-top: 15px;
     margin-bottom: 30px;
     margin-left: 250px;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 10px 20px;
     border-radius: 10px;
-    width: 200px;
+    width: 185px;
     height: 40px;
     font-size: 17px;
 }

@@ -3,11 +3,11 @@
 
 {% block title %}
     <title>Каталог GLAMMER</title>
-{% endblock  %}
+{% endblock %}
 
 {% block css %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static "products\styles\catalog.css" %}">
+    <link rel="stylesheet" href="{% static 'products/styles/catalog.css' %}">
 {% endblock %}
 
 {% block main %}
@@ -17,21 +17,21 @@
                 {% if product.image %}
                     {% if product.discount %}
                         <div class="container">
-                            <a href=""><img src="{{ product.image.url }}" alt="{{ product.name }}" class="image"></a>
-                            <div class="text">СКИДКА {{ product.discount }}%</div>
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image" loading="lazy">
+                            <div class="discount">СКИДКА {{ product.discount }}%</div>
                         </div>
                     {% else %}
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
                     {% endif %}
                 {% else %}
-                    <img src="{% static "main/images/default.jpg" %}" alt="Изображения нет!">
+                    <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
                 {% endif %}
                 <div class="description">
-                    <a href="{% url "products:product" product.id %}">{{ product.name }}</a>
+                    <a href="{% url 'products:product' product.id %}">{{ product.name }}</a>
                     <p class="productId">{{ product.id }}</p>
                     <div class="colors">
-                        <button>Беж</button>
-                        <button>Чёрный</button>
+                        <a>Беж</a>
+                        <a>Чёрный</a>
                     </div>
                     {% if product.discount %}
                         <div class="priceForSell">
@@ -42,19 +42,20 @@
                         <p>{{ product.price }} руб.</p>
                     {% endif %}
                     
-                    <button class="cartButton">Добавить в корзину</button>
+                    <form method="post" action="{% url 'carts:add_to_cart' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="cartButton">Добавить в корзину</button>
+                    </form>
                 </div>
             </article>
         {% empty %}
             <div class="error"><h1>Нет элементов для отображения!</h1></div>
         {% endfor %}
-        
     </section>
-    <nav class="pagination">
-        <ul>
-            <li><a href="">&lt;</a>
-            <li><a href="">1</a>
-            <li><a href="">&gt;</a>
-        </ul>
-    </nav>
+    {% include "pagination.html" with page=page_obj %}
 {% endblock %}
+
+
+

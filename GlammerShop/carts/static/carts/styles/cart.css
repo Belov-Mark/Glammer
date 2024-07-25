@@ -1,0 +1,94 @@
+.titleForCart {
+    font-size: 30px;
+    margin-top: 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    vertical-align: middle;
+    text-align: left;
+    
+}
+
+
+
+thead {
+    font-size: 18px;
+    border-bottom: 1px solid white;
+    vertical-align: top;
+}
+
+thead th, td {
+    padding-bottom: 30px;
+}
+
+thead th, thead td:first-child {
+    padding-left: 25px;
+}
+
+tbody {
+    font-size: 20px;
+}
+
+tbody tr {
+    border-bottom: 1px solid white;
+}
+
+tbody th, tbody td {
+    padding: 40px 0px;
+}
+
+.fotoAndInfo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.fotoAndInfo img {
+    width: 150px;
+    height: 120px;
+}
+
+.infoForProduct {
+    display: flex;
+    flex-direction: column;
+}
+
+.nameForProduct {
+    font-size: 25px;
+}
+
+.priceForSell {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin: 0;
+}
+
+input {
+    color: black;
+}
+
+.close {
+    width: 25px;
+    height: 25px;
+}
+
+.close circle {
+    fill: red;
+    opacity: 0.5;
+}
+
+.close line {
+    fill: none;
+    stroke: #023538;
+    stroke-miterlimit: 10;
+}
+
+.buttonClose {
+    cursor: pointer;
+    background: none;
+}

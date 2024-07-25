@@ -31,11 +31,12 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'main',
-    'products',
-    'users',
-    'carts',
-    'citys',
+    'main.apps.MainConfig',
+    'products.apps.ProductsConfig',
+    'users.apps.UsersConfig',
+    'carts.apps.CartsConfig',
+    'citys.apps.CitysConfig',
+    ####################
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,9 +149,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 
-LOGIN_URL = '/users/login/'
-
 LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
 
 
 
@@ -165,3 +167,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nikitapk01@gmail.com'
 
 EMAIL_HOST_PASSWORD = 'arfd vgev fhvb jxrr'
+
+ASGI_APPLICATION = 'yourprojectname.asgi.application'
