@@ -15,57 +15,41 @@
     <section class="slider-container">
         <article class="slider" id="slider1">
             <div class="slides">
-                <div class="slide">
-                    <img src="{% static "main/images/13.jpg" %}" alt="Image 1">
-                </div>
-                <div class="slide">
-                    <img src="{% static "main/images/14.jpg" %}" alt="Image 2">
-                </div>
-                <div class="slide">
-                    <img src="{% static "main/images/13.jpg" %}" alt="Image 3">
-                </div>
-                <div class="slide">
-                    <img src="{% static "main/images/14.jpg" %}" alt="Image 4">
-                </div>
+                {% for slide in slider1_slides %}
+                    <div class="slide">
+                        <img src="{{ slide.image.url }}" alt="{{ slide.title }}">
+                    </div>
+                {% endfor %}
             </div>
             <a class="prev" onclick="prevSlide(1)">&#10094;</a>
             <a class="next" onclick="nextSlide(1)">&#10095;</a>
             <div class="dots">
-                <span class="dot" onclick="currentSlide(1, 0)"></span>
-                <span class="dot" onclick="currentSlide(1, 1)"></span>
-                <span class="dot" onclick="currentSlide(1, 2)"></span>
-                <span class="dot" onclick="currentSlide(1, 3)"></span>
+                {% for slide in slider1_slides %}
+                    <span class="dot" onclick="currentSlide(1, {{ forloop.counter0 }})"></span>
+                {% endfor %}
             </div>
         </article>
         <article class="slider" id="slider2">
             <div class="slides">
-                <div class="slide">
-                    <img src="{% static "main/images/14.jpg" %}" alt="Image 1">
-                </div>
-                <div class="slide">
-                    <img src="{% static "main/images/13.jpg" %}" alt="Image 2">
-                </div>
-                <div class="slide">
-                    <img src="{% static "main/images/14.jpg" %}" alt="Image 3">
-                </div>
-                <div class="slide">
-                    <img src="{% static "main/images/13.jpg" %}" alt="Image 4">
-                </div>
+                {% for slide in slider2_slides %}
+                    <div class="slide">
+                        <img src="{{ slide.image.url }}" alt="{{ slide.title }}">
+                    </div>
+                {% endfor %}
             </div>
             <a class="prev" onclick="prevSlide(2)">&#10094;</a>
             <a class="next" onclick="nextSlide(2)">&#10095;</a>
             <div class="dots">
-                <span class="dot" onclick="currentSlide(2, 0)"></span>
-                <span class="dot" onclick="currentSlide(2, 1)"></span>
-                <span class="dot" onclick="currentSlide(2, 2)"></span>
-                <span class="dot" onclick="currentSlide(2, 3)"></span>
+                {% for slide in slider2_slides %}
+                    <span class="dot" onclick="currentSlide(2, {{ forloop.counter0 }})"></span>
+                {% endfor %}
             </div>
         </article>
     </section>
 
     <section>
-        <p href="#" class="titleSection">НОВИНКИ</p>
-        <a href="#" class="paragrafSection">Все новинки</a>
+        <p class="titleSection">НОВИНКИ</p>
+        <a href="{% url 'products:news' %}" class="paragrafSection">Все новинки</a>
     </section>
     <section class="catalog">
         {% for newProduct in newProducts %}
@@ -80,7 +64,14 @@
                     <img src="{{ newProduct.image.url }}" alt="{{ newProduct.name }}">
                 {% endif %}
             {% else %}
-                <img src="{% static "images/foto.webp" %}" alt="Изображения нет!">
+                {% if newProduct.discount %}
+                    <div class="container">
+                        <img src="{% static "images/foto.webp" %}" alt="Изображения нет!">
+                        <div class="discount">СКИДКА {{ newProduct.discount }}%</div>
+                    </div>
+                {% else %}
+                    <img src="{% static "images/foto.webp" %}" alt="Изображения нет!">
+                {% endif %}
             {% endif %}
             <div class="description">
                 <a href="{% url "products:product" newProduct.id %}">{{ newProduct.name }}</a>
@@ -115,8 +106,8 @@
     </section>
 
     <section>
-        <p href="#" class="titleSection titleDiscount">СКИДКА!</p>
-        <a href="#" class="paragrafSection">Все товары со скидкой</a>
+        <p class="titleSection titleDiscount">СКИДКА!</p>
+        <a href="{% url 'products:sale' %}" class="paragrafSection">Все товары со скидкой</a>
     </section>
     <section class="catalog">
         {% for saleProduct in saleProducts %}
@@ -131,7 +122,15 @@
                         <img src="{{ saleProduct.image.url }}" alt="{{ saleProduct.name }}">
                     {% endif %}
                 {% else %}
-                    <img src="{% static "product_images/foto.png" %}" alt="Изображения нет!">
+                    {% if saleProduct.discount %}
+                        <div class="container">
+                            <img src="{% static "images/foto.webp" %}" alt="Изображения нет!">
+                            <div class="discount">СКИДКА {{ saleProduct.discount }}%</div>
+                        </div>
+                    {% else %}
+                        <img src="{% static "images/foto.webp" %}" alt="Изображения нет!">
+                    {% endif %}
+                    
                 {% endif %}
                 <div class="description">
                     <a href="{% url "products:product" saleProduct.id %}">{{ saleProduct.name }}</a>
@@ -149,7 +148,12 @@
                         <p>{{ saleProduct.price }} руб.</p>
                     {% endif %}
                     
-                    <a class="cartButton">Добавить в корзину</a>
+                    <form method="post" action="{% url 'carts:cart' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <button type="submit" class="cartButton">Добавить в корзину</button>
+                    </form>
                 </div>
             </article>
         {% empty %}

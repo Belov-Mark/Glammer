@@ -15,8 +15,8 @@ class CatalogView(ListView):
     context_object_name = 'products'
 
     # постраничная разбивка
-    paginate_by = 3
-
+    paginate_by = 1
+    
     # показывать пустую страницу вместо ошибки 404
     allow_empty = False
 

@@ -135,6 +135,9 @@
     border: 1px #fff solid;
     border-radius: 7px;
     padding: 0px 4px;
+    width: 200px;
+    height: 30px;   
+    font-size: 22px;
 }
 
 .all {

@@ -1,24 +1,69 @@
 <nav class="pagination">
+    <!-- Кнопка "Назад" -->
     {% if page.has_previous %}
         <a href="?page={{ page.previous_page_number }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
                 <path d="M14.10073,0,7.05049,2.45114,0,4.902,7.05049,7.35291,14.10073,9.804C11.74279,6.59817,11.69717,3.33138,14.10073,0Z"/>
             </svg>
         </a>
+    {% else %}
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
+                <path d="M14.10073,0,7.05049,2.45114,0,4.902,7.05049,7.35291,14.10073,9.804C11.74279,6.59817,11.69717,3.33138,14.10073,0Z"/>
+            </svg>
+        </a>
     {% endif %}
 
-    {% for num in page.paginator.page_range %}
-        {% if num > page.number|add:'-3' and num < page.number|add:'3' %}
+    <!-- Пагинация -->
+    {% if page.paginator.num_pages > 6 %}
+        <!-- Первая страница -->
+        <a href="?page=1">1</a>
+
+        <!-- Многоточие после первой страницы, если текущая страница больше 3 -->
+        {% if page.number > 4 %}
+            <span>...</span>
+        {% endif %}
+
+        <!-- Средние страницы (до 4 вокруг текущей страницы) -->
+        {% for num in page.paginator.page_range %}
+            {% if num > 1 and num < page.paginator.num_pages %}
+                {% if num >= page.number|add:'-2' and num <= page.number|add:'2' %}
+                    {% if num == page.number %}
+                        <a class="active" href="#">{{ num }}</a>
+                    {% else %}
+                        <a href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        <!-- Многоточие перед последней страницей, если текущая страница меньше total_pages - 3 -->
+        {% if page.number < page.paginator.num_pages|add:'-3' %}
+            <span>...</span>
+        {% endif %}
+
+        <!-- Последняя страница -->
+        <a href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
+    {% else %}
+        <!-- Показываем все страницы, если их 6 или меньше -->
+        {% for num in page.paginator.page_range %}
             {% if num == page.number %}
-                <span class="current">{{ num }}</span>
+                <a class="active" href="#">{{ num }}</a>
             {% else %}
                 <a href="?page={{ num }}">{{ num }}</a>
             {% endif %}
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 
+    <!-- Кнопка "Вперед" -->
     {% if page.has_next %}
         <a href="?page={{ page.next_page_number }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
+                <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
+            </svg>
+        </a>
+    {% else %}
+        <a href="#">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
                 <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z"/>
             </svg>

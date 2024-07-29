@@ -18,13 +18,20 @@
                     {% if product.discount %}
                         <div class="container">
                             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image" loading="lazy">
-                            <div class="text">СКИДКА {{ product.discount }}%</div>
+                            <div class="discount">СКИДКА {{ product.discount }}%</div>
                         </div>
                     {% else %}
                         <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
                     {% endif %}
                 {% else %}
-                    <img src="{% static "images/foto.webp" %}" alt="Изображения нет!" loading="lazy">
+                    {% if product.discount %}
+                        <div class="container">
+                            <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
+                            <div class="discount">СКИДКА {{ product.discount }}%</div>
+                        </div>
+                    {% else %}
+                        <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
+                    {% endif %}
                 {% endif %}
                 <div class="description">
                     <a href="{% url "products:product" product.id %}">{{ product.name }}</a>
@@ -41,8 +48,12 @@
                     {% else %}
                         <p>{{ product.price }} руб.</p>
                     {% endif %}
-                    
-                    <button class="cartButton">Добавить в корзину</button>
+                    <form method="post" action="{% url 'carts:cart' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <button type="submit" class="cartButton">Добавить в корзину</button>
+                    </form>
                 </div>
             </article>
         {% empty %}

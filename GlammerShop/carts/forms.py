@@ -1,7 +1,11 @@
-# forms.py
 from django import forms
-from .models import Product
+from products.models import Product
 
 class AddToCartForm(forms.Form):
-    product = forms.ModelChoiceField(queryset=Product.objects.all())
-    quantity = forms.IntegerField(min_value=1)
+    product_id = forms.IntegerField()
+
+    def clean_product_id(self):
+        product_id = self.cleaned_data['product_id']
+        if not Product.objects.filter(id=product_id).exists():
+            raise forms.ValidationError("Продукт не существует")
+        return product_id

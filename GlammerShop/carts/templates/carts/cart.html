@@ -20,11 +20,17 @@
                 <td>Количество</td>
                 <td>Стоимость</td>
                 <td>
-                    <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
-                        <circle cx="12.85106" cy="12.85106" r="12.85106"/>
-                        <line x1="6.88298" y1="6.88298" x2="18.81915" y2="18.81915"/>
-                        <line x1="18.81915" y1="6.88298" x2="6.88298" y2="18.81915"/>
-                    </svg>
+                    <form method="post" action="{% url 'carts:cart' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="clear">
+                        <button type="submit" class="clearCart" title="Очистить корзину">
+                            <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
+                                <circle cx="12.85106" cy="12.85106" r="12.85106"/>
+                                <line x1="6.88298" y1="6.88298" x2="18.81915" y2="18.81915"/>
+                                <line x1="18.81915" y1="6.88298" x2="6.88298" y2="18.81915"/>
+                            </svg>
+                        </button>
+                    </form>
                 </td>
             </tr>
         </thead>
@@ -32,17 +38,24 @@
             {% for item in cart.items.all %}
                 <tr>
                     <td class="fotoAndInfo">
-                        {% if product.image %}
-                            {% if product.discount %}
+                        {% if item.product.image %}
+                            {% if item.product.discount %}
                                 <div class="container">
-                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image" loading="lazy">
-                                    <div class="discount">СКИДКА {{ product.discount }}%</div>
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="image" loading="lazy">
+                                    <div class="discount">СКИДКА {{ item.product.discount }}%</div>
                                 </div>
                             {% else %}
-                                <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" loading="lazy">
                             {% endif %}
                         {% else %}
+                            {% if item.product.discount %}
+                                <div class="container">
+                                    <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
+                                    <div class="discount">СКИДКА {{ item.product.discount }}%</div>
+                                </div>
+                            {% else %}
                             <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
+                            {% endif %}
                         {% endif %}
                         <div class="infoForProduct">
                             <p class="nameForProduct">{{ item.product.name }}</p>
@@ -66,6 +79,7 @@
                     <td>
                         {% if item.product.discount %}
                             <div class="priceForSell">
+                                <p class="oldPrice">{{ item.product.price }} руб.</p>
                                 <p>{{ item.product.sellPrice }} руб.</p>
                             </div>
                         {% else %}
@@ -77,7 +91,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="action" value="remove">
                             <input type="hidden" name="product_id" value="{{ item.product.id }}">
-                            <button class="buttonClose" type="submit">
+                            <button class="buttonClose" type="submit" title="Удалить товар из корзины">
                                 <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
                                     <circle cx="12.85106" cy="12.85106" r="12.85106"/>
                                     <line x1="6.88298" y1="6.88298" x2="18.81915" y2="18.81915"/>
@@ -87,7 +101,18 @@
                         </form>
                     </td>
                 </tr>
+            {% empty %}
+                <tr>Корзина пуста!</tr>
             {% endfor %}
         </tbody>
-     </table>
+    </table>
+    <form action="" method="">
+        <label for="">Код купону или подарочного сертификата</label><br>
+        <input type="text">
+        <button>Применить</button>
+    </form>
+    <div>
+        <p>Итого: 9898руб.</p>
+    </div>
+    <button>Оформить</button>
 {% endblock %}
