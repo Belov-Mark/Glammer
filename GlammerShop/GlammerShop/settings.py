@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'carts.apps.CartsConfig',
     'citys.apps.CitysConfig',
+    'favorites.apps.FavoritesConfig',
     ####################
     'django.contrib.admin',
     'django.contrib.auth',

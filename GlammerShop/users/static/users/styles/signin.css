@@ -100,6 +100,31 @@ form {
     transform: translate(-50%, -50%);
 }
 
+.city {
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: inherit;
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    width: 530px;
+    cursor: pointer;
+    appearance: none;
+}
+
+.city:focus {
+    outline: none;
+}
+
+.city option {
+    font-size: inherit;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.city option:hover {
+    background-color: #f08686;
+}
 
 
 .info {

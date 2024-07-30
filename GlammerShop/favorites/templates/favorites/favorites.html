@@ -23,7 +23,7 @@
                     <form method="post" action="{% url 'carts:cart' %}" style="display:inline;">
                         {% csrf_token %}
                         <input type="hidden" name="action" value="clear">
-                        <button type="submit" class="clearCart" title="Очистить корзину">
+                        <button type="submit" class="clearCart" title="Очистить список желаний">
                             <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
                                 <circle cx="12.85106" cy="12.85106" r="12.85106"/>
                                 <line x1="6.88298" y1="6.88298" x2="18.81915" y2="18.81915"/>
@@ -35,7 +35,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in cart.items.all %}
+            {% for item in favorite.items.all %}
                 <tr>
                     <td class="fotoAndInfo">
                         {% if item.product.image %}

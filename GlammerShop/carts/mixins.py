@@ -1,7 +1,5 @@
-import uuid
-
-from django.shortcuts import get_object_or_404
 from .models import Cart
+
 
 class ReceivingCartMixin:
     def get_cart(self, request):

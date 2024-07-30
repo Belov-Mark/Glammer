@@ -19,7 +19,7 @@
         <nav class="primary-header">
             <a class="login" href="{% url 'users:login' %}">Вход</a>
             <a href="{% url 'users:signin' %}">Регистрация</a>
-            <a class="wishList" href="#">Список желаний: Пуст</a>
+            <a class="wishList" href="{% url "favorites:favorite" %}">Список желаний: Пуст</a>
         </nav>
     </header>
 

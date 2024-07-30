@@ -2,10 +2,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm as BaseUserChangeForm
 from django.forms import widgets
 
+from citys.models import City
 from .models import User
+
 
 class LoginForm(AuthenticationForm):
     username = forms.EmailField(label='Email')
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -26,6 +29,14 @@ class LoginForm(AuthenticationForm):
 
 class SignInForm(UserCreationForm):
     sex = forms.ChoiceField(choices=[('M', 'М'), ('F', 'Ж')], widget=forms.RadioSelect(attrs={'class': 'sex'}), label='Пол')
+    name = forms.CharField(max_length=50, label='Имя')
+    surname = forms.CharField(max_length=50, label='Фамилия')
+    email = forms.EmailField(label='Email')
+    number = forms.CharField(max_length=20, widget=widgets.TextInput(attrs={'type': 'tel'}), label='Контактный номер')
+    date = forms.DateField(widget=widgets.DateInput(attrs={'type': 'date'}), label='Дата рождения')
+    city = forms.ModelChoiceField(queryset=City.objects.all(), initial=3, widget=widgets.Select(attrs={'class': 'city'}), label='Город')
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput)
     
     class Meta:
         model = User

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
 from django.views import View
 
 from products.models import Product
@@ -10,8 +9,7 @@ from .mixins import ReceivingCartMixin
 class CartView(ReceivingCartMixin, View):
     def get(self, request):
         cart = self.get_cart(request)
-        print("Корзина:", cart)
-        print("Элементы корзины:", list(cart.items.all()))
+
         response = render(request, 'carts/cart.html', {'cart': cart})
         
         # Устанавливаем куки, если это новый cart_cookie
@@ -60,4 +58,4 @@ class AddToCartView(ReceivingCartMixin, View):
         else:
             cart_item.quantity = quantity
         cart_item.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        return redirect(request.META.get('HTTP_REFERER', '/'))

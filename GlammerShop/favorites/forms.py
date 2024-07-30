@@ -3,7 +3,7 @@ from django import forms
 from products.models import Product
 
 
-class AddToCartForm(forms.Form):
+class AddToFavoritesForm(forms.Form):
     product_id = forms.IntegerField()
 
     def clean_product_id(self):
@@ -11,4 +11,3 @@ class AddToCartForm(forms.Form):
         if not Product.objects.filter(id=product_id).exists():
             raise forms.ValidationError("Продукт не существует")
         return product_id
-
