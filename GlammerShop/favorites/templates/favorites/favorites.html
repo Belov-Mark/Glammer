@@ -1,14 +1,14 @@
-{% extends "global.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}
     <title>GLAMMER | muslim</title>
-{% endblock %}
+{% endblock title %}
 
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'carts/styles/cart.css' %}">
-{% endblock %}
+{% endblock css %}
 
 {% block main %}
     <p class="titleForCart">КОРЗИНА</p>
@@ -121,4 +121,4 @@
         <p>Итого: 9898руб.</p>
     </div>
     <button>Оформить</button>
-{% endblock %}
+{% endblock main %}

@@ -1,5 +1,10 @@
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/includes/pagination.css' %}">
+{% endblock css %}
+
 <nav class="pagination">
-    <!-- Кнопка "Назад" -->
     {% if page.has_previous %}
         <a href="?page={{ page.previous_page_number }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
@@ -14,17 +19,13 @@
         </a>
     {% endif %}
 
-    <!-- Пагинация -->
     {% if page.paginator.num_pages > 6 %}
-        <!-- Первая страница -->
         <a href="?page=1">1</a>
 
-        <!-- Многоточие после первой страницы, если текущая страница больше 3 -->
         {% if page.number > 4 %}
             <span>...</span>
         {% endif %}
 
-        <!-- Средние страницы (до 4 вокруг текущей страницы) -->
         {% for num in page.paginator.page_range %}
             {% if num > 1 and num < page.paginator.num_pages %}
                 {% if num >= page.number|add:'-2' and num <= page.number|add:'2' %}
@@ -37,15 +38,12 @@
             {% endif %}
         {% endfor %}
 
-        <!-- Многоточие перед последней страницей, если текущая страница меньше total_pages - 3 -->
         {% if page.number < page.paginator.num_pages|add:'-3' %}
             <span>...</span>
         {% endif %}
 
-        <!-- Последняя страница -->
         <a href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
     {% else %}
-        <!-- Показываем все страницы, если их 6 или меньше -->
         {% for num in page.paginator.page_range %}
             {% if num == page.number %}
                 <a class="active" href="#">{{ num }}</a>
@@ -55,7 +53,6 @@
         {% endfor %}
     {% endif %}
 
-    <!-- Кнопка "Вперед" -->
     {% if page.has_next %}
         <a href="?page={{ page.next_page_number }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">

@@ -1,0 +1,46 @@
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'styles/includes/product.css' %}">
+{% endblock css %}
+
+<article class="item">
+  {% if product.image %}
+      <div class="container">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" />
+        {% if product.discount %}
+            <div class="discount">СКИДКА {{ product.discount }}%</div>
+        {% endif %}
+          <a href="{% url 'favorites:favorite' %}" class="add-to-favorite" data-product-id="{{ product.id }}"></a>
+      </div>
+    {% else %}
+      <div class="container">
+        <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy" />
+        {% if product.discount %}
+            <div class="discount">СКИДКА {{ product.discount }}%</div>
+        {% endif %}
+          <a href="{% url 'favorites:favorite' %}" class="add-to-favorite" data-product-id="{{ product.id }}"></a>
+      </div>
+  {% endif %}
+  <div class="description">
+    <a href="{% url 'products:product' product.id %}">{{ product.name }}</a>
+    <p class="productId">{{ product.id }}</p>
+    <div class="colors">
+      <a>Беж</a>
+      <a>Чёрный</a>
+    </div>
+    {% if product.discount %}
+      <div class="priceForSell">
+        <p class="oldPrice">{{ product.price }} руб.</p>
+        <p>{{ product.sellPrice }} руб.</p>
+      </div>
+    {% else %}
+      <p>{{ product.price }} руб.</p>
+    {% endif %}
+    <a href="{% url "carts:cart_add" %}" class="add-to-cart" data-product-id="{{ product.id }}">
+        {% csrf_token %}
+        Добавить в корзину
+    </a>
+  </div>
+</article>
+

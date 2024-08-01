@@ -1,0 +1,36 @@
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/includes/cityMenu.css' %}" />
+{% endblock css %}
+
+{% if user.is_authenticated %}
+  {% if user.city %}
+    <span class="city">
+      Ваш город: <a onclick="toggleDropdownMenu('cityMenu')" id="currentCity">
+        {% if user.city.reduction %}
+          {{ user.city.reduction }}
+        {% else %}
+          {{ user.city.name }}
+        {% endif %}
+      </a>
+    </span>
+  {% else %}
+    <span class="city">Ваш город: <a onclick="toggleDropdownMenu('cityMenu')" id="currentCity">Москва</a></span>
+  {% endif %}
+{% else %}
+  <span class="city">Ваш город: <a onclick="toggleDropdownMenu('cityMenu')" id="currentCity">Москва</a></span>
+{% endif %}
+
+<nav id="cityMenu">
+  {% for city in citys %}
+    <a class="dropdown-item"
+      onclick="changeCity('{% if city.reduction %}
+        {{ city.reduction }}
+      {% else %}
+        {{ city.name }}
+      {% endif %}')">
+      {{ city.name }}
+    </a>
+  {% endfor %}
+</nav>

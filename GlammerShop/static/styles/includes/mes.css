@@ -1,0 +1,40 @@
+.mes {
+    position: fixed;
+    right: 30px;
+    bottom: 40px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.mes svg {
+    width: 4.75vw;
+    height: 4.75vw;
+}
+
+.cls-1-mes {
+    fill:#277c7a;
+}
+
+.cls-2-mes {
+    fill:#74cece;
+}
+
+.cls-3-mes {
+    fill: rgba(0, 0, 0, 0.35)
+}
+
+.mes:hover .cls-1-mes {
+    fill: rgb(39, 124, 122, 0.5)
+}
+
+.mes:hover .cls-2-mes {
+    fill: rgb(116, 206, 206, 0.5)
+}
+
+.mes:hover .cls-3-mes {
+    fill: rgba(0, 0, 0, 0.5)
+}
+
+.mesImages {
+    display: none;
+}

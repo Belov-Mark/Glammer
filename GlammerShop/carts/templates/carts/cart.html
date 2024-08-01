@@ -1,14 +1,18 @@
-{% extends "global.html" %}
+{% extends "base.html" %}
 {% load static %}
+{% load carts_tags %}
+
+{% user_carts request as carts %}
+
 
 {% block title %}
     <title>GLAMMER | muslim</title>
-{% endblock %}
+{% endblock title %}
 
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'carts/styles/cart.css' %}">
-{% endblock %}
+{% endblock css %}
 
 {% block main %}
     <p class="titleForCart">КОРЗИНА</p>
@@ -35,68 +39,76 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in cart.items.all %}
+            {% for cart in carts %}
                 <tr>
                     <td class="fotoAndInfo">
-                        {% if item.product.image %}
-                            {% if item.product.discount %}
+                        {% if cart.product.image %}
+                            {% if cart.product.discount %}
                                 <div class="container">
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="image" loading="lazy">
-                                    <div class="discount">СКИДКА {{ item.product.discount }}%</div>
+                                    <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}" class="image" loading="lazy">
+                                    <div class="discount">СКИДКА {{ cart.product.discount }}%</div>
                                 </div>
                             {% else %}
-                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" loading="lazy">
+                                <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}" loading="lazy">
                             {% endif %}
                         {% else %}
-                            {% if item.product.discount %}
+                            {% if cart.product.discount %}
                                 <div class="container">
                                     <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
-                                    <div class="discount">СКИДКА {{ item.product.discount }}%</div>
+                                    <div class="discount">СКИДКА {{ cart.product.discount }}%</div>
                                 </div>
                             {% else %}
                             <img src="{% static 'images/foto.webp' %}" alt="Изображения нет!" loading="lazy">
                             {% endif %}
                         {% endif %}
                         <div class="infoForProduct">
-                            <p class="nameForProduct">{{ item.product.name }}</p>
+                            <p class="nameForProduct">{{ cart.product.name }}</p>
                             <p>Цвет: Черный</p>
                             <p>Размер: 42</p>
                         </div>
                     </td>
                     <td>
-                        {% if item.product.discount %}
+                        {% if cart.product.discount %}
                             <div class="priceForSell">
-                                <p class="oldPrice">{{ item.product.price }} руб.</p>
-                                <p>{{ item.product.sellPrice }} руб.</p>
+                                <p class="oldPrice">{{ cart.product.price }} руб.</p>
+                                <p>{{ cart.product.sellPrice }} руб.</p>
                             </div>
                         {% else %}
-                            <p>{{ item.product.price }} руб.</p>
+                            <p>{{ cart.product.price }} руб.</p>
                         {% endif %}
                     </td>
                     <td class="custom-number-input">
-                        <input type="number" value="{{ item.quantity }}">
-                        <button class="decrement">
-                            
-                        </button>
-                        <button class="increment">
-                            
-                        </button>
+                        <input type="number" min="1" max="25" value="{{ cart.quantity }}">
+                        <span>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.09009 4.25215">
+                                    <polyline points="6.737 3.899 3.545 0.707 0.354 3.899" style="fill:none;stroke:#fff;stroke-miterlimit:10"/>
+                                </svg>
+                            </button>
+                        </span>
+                        <span>
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.09009 4.25215">
+                                    <polyline points="6.737 0.354 3.545 3.545 0.354 0.354" style="fill:none;stroke:#fff;stroke-miterlimit:10"/>
+                                </svg>
+                            </button>
+                        </span>
                     </td>
                     <td>
-                        {% if item.product.discount %}
+                        {% if cart.product.discount %}
                             <div class="priceForSell">
-                                <p class="oldPrice">{{ item.product.price }} руб.</p>
-                                <p>{{ item.product.sellPrice }} руб.</p>
+                                <p class="oldPrice">{{ cart.product.price }} руб.</p>
+                                <p>{{ cart.product.sellPrice }} руб.</p>
                             </div>
                         {% else %}
-                            <p>{{ item.product.price }} руб.</p>
+                            <p>{{ cart.product.price }} руб.</p>
                         {% endif %}
                     </td>
                     <td>
                         <form method="post" action="{% url 'carts:cart' %}" style="display:inline;">
                             {% csrf_token %}
                             <input type="hidden" name="action" value="remove">
-                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                            <input type="hidden" name="product_id" value="{{ cart.product.id }}">
                             <button class="buttonClose" type="submit" title="Удалить товар из корзины">
                                 <svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.70213 25.70213">
                                     <circle cx="12.85106" cy="12.85106" r="12.85106"/>
@@ -112,13 +124,4 @@
             {% endfor %}
         </tbody>
     </table>
-    <form action="" method="">
-        <label for="">Код купону или подарочного сертификата</label><br>
-        <input type="text">
-        <button>Применить</button>
-    </form>
-    <div>
-        <p>Итого: 9898руб.</p>
-    </div>
-    <button>Оформить</button>
-{% endblock %}
+{% endblock main %}

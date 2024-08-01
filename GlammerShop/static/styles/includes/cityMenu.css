@@ -1,0 +1,22 @@
+.city {
+    margin-left: auto;
+}
+
+#cityMenu {
+    display: none;
+    flex-direction: column;
+    border: 1px solid #fff;
+    list-style: none;
+    position: absolute;
+    top: 140px;
+    right: 170px;
+    z-index: 1;
+    background-color: #012224;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.city, #cityMenu {
+    text-wrap: nowrap;
+}

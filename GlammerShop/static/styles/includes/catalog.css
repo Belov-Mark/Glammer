@@ -1,0 +1,113 @@
+/* каталог */
+#dropdownBtn {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    margin: 0px 4vw;
+}
+
+#burgerIcon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.line {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1px;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.line1 {
+    transform-origin: 50% 50%;
+}
+
+.line3 {
+    transform-origin: 50% 50%;
+}
+
+#dropdownBtn:hover .line {
+    stroke: rgba(255, 255, 255, 0.7);
+}
+
+.open .line1 {
+    transform: rotate(45deg) translate(7.5px, 7.5px);
+}
+
+.open .line2 {
+    opacity: 0;
+}
+
+.open .line3 {
+    transform: rotate(-45deg) translate(7.5px, -7.5px);
+}
+
+#catalog {
+    display: none;
+    position: absolute;
+    left: 100px;
+    top: 225px;
+    min-width: 665px;
+    z-index: 1;
+    background-color: #012224;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    align-items: start;
+    width: 50%;
+    border: 1px solid #fff;
+    padding: 30px 25px 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.subcategory {
+    display: none;
+    flex-direction: column;
+    row-gap: 15px;
+    align-items: start;
+    width: 50%;
+    border: 1px solid #fff;
+    padding: 30px 25px 20px;
+}
+
+.categoryItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.catalogArrow {
+    fill: #fff;
+    width: 15px;
+    height: 10px;
+    cursor: pointer;
+    justify-content: end;
+}
+
+.catalogArrow:hover {
+    fill: rgba(255, 255, 255, 0.7);
+}
+
+#inputText {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 40px;
+    padding: 17px;
+    font-size: inherit;
+    border: 0;
+    border-radius: 10px;
+}
+
+#inputText:focus {
+    outline: none;
+}

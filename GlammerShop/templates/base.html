@@ -1,0 +1,112 @@
+{% load static %}
+{% load tags %}
+{% load carts_tags %}
+
+{% user_carts request as carts %}
+
+<!DOCTYPE html>
+<html lang="ru" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="svg" href="{% static 'images/GlammerTitleImg.svg' %}" />
+    {% block title %}
+
+    {% endblock title %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+    {% block css %}
+
+    {% endblock css %}
+  </head>
+  <body>
+    {% comment %}first header{% endcomment %}
+
+    <header>
+      <nav class="primary-header">
+        <a class="login" href="{% url 'users:login' %}">Вход</a>
+        <a href="{% url 'users:signin' %}">Регистрация</a>
+        <a class="wishList" href="{% url 'favorites:favorite' %}">Список желаний: Пуст</a>
+      </nav>
+    </header>
+
+    {% comment %}second header{% endcomment %}
+
+    <header>
+      <nav class="secondary-header">
+        <a href="{% url 'main:main' %}"><img class="logo" src="{% static 'images/GlammerLogoImg.webp' %}" alt="GLAMMER" /></a>
+        {% include "includes/catalog.html" %}
+        <nav class="centerMenu">
+          <a class="item" href="">Галерея</a>
+          <a class="item" href="">Коллекции</a>
+          <a class="item" href="">Доставка</a>
+          <a class="item" href="">Возврат и обмен</a>
+          <a class="item" href="{% url 'main:contacts' %}">Контакты</a>
+        </nav>
+        {% include "includes/cityMenu.html" %}
+        |
+        <a class="cart" id="cart-items-container" href="{% url 'carts:cart' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.78494 23.72197">
+            <polyline class="cls-1" points="0 0.5 3.404 0.5 6.255 13.947 22.383 12.33 24.17 3.777 4.383 3.691" />
+            <polyline class="cls-1" points="6.372 14.064 8.285 16.415 21.021 16.178" />
+            <circle class="cls-1" cx="8.93617" cy="20.79644" r="2.42553" />
+            <circle class="cls-1" cx="18.95745" cy="20.79644" r="2.42553" />
+            <line class="cls-1" x1="9" y1="16.65957" x2="9" y2="17.98404" />
+            <line class="cls-1" x1="18.95745" y1="16.41489" x2="18.95745" y2="18.17553" />
+          </svg>
+          <b>КОРЗИНА: <span id="goods-in-cart-count">{{ carts.total_quantity }}</span></b>
+        </a>
+      </nav>
+    </header>
+
+    {% comment %}main{% endcomment %}
+
+    <main>
+      {% block main %}
+
+      {% endblock main %}
+    </main>
+
+    {% comment %}footer{% endcomment %}
+
+    <footer>
+      <section class="footerToggleMenu">
+        <a onclick="toggleDropdownMenu('infoMenu')">Информация</a>
+        <nav id="infoMenu" class="footerMenu">
+          <a href="#">Доставка и оплата</a>
+          <a href="#">Политика конфедециальности</a>
+          <a href="#">Оферта</a>
+          <a href="#">Контакты</a>
+        </nav>
+
+        <a onclick="toggleDropdownMenu('cabinetMenu')">Личный кабинет</a>
+        <nav id="cabinetMenu" class="footerMenu">
+          <a href="{% url 'users:login' %}">Вход</a>
+          <a href="{% url 'users:signin' %}">Регистрация</a>
+          <a href="{% url 'users:recovery' %}">Забыли пароль?</a>
+        </nav>
+
+        <a onclick="toggleDropdownMenu('socialMenu')">Мы в соц сетях</a>
+        <nav id="socialMenu" class="footerMenu">
+          <a class="socialItem" href="#">
+            <img class="socialFoto" src="{% static 'images/inst.webp' %}" alt="Инстаграм" loading="lazy" />
+            Instagram
+          </a>
+          <a class="socialItem" href="#">
+            <img class="socialFoto" src="{% static 'images/tg.webp' %}" alt="Телеграм" loading="lazy" />
+            Telegram
+          </a>
+        </nav>
+      </section>
+      <a id="brand" href="{% url 'admin:index' %}">GLAMMER BRAND © 2024</a>
+    </footer>
+
+    {% include "includes/mes.html" %}
+
+    <script src="{% static 'scripts/includes/menu.js' %}" async></script>
+    <script src="{% static 'scripts/jquery/jquery-3.7.0.min.js' %}" async></script>
+    <script src="{% static 'scripts/jquery-ajax.js' %}" async></script>
+    {% block script %}
+
+    {% endblock %}
+  </body>
+</html>

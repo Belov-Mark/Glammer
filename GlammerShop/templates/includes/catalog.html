@@ -1,0 +1,43 @@
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'styles/includes/catalog.css' %}" />
+{% endblock %}
+
+<a id="dropdownBtn" onclick="toggleDropdownMenu('catalog')">
+  <svg id="burgerIcon" viewBox="0 0 24 24">
+    <line class="line line1" x1="3" y1="6" x2="21" y2="6"></line>
+    <line class="line line2" x1="3" y1="12" x2="21" y2="12"></line>
+    <line class="line line3" x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+  КАТАЛОГ
+</a>
+
+<nav id="catalog">
+  <article class="category">
+    <a href="{% url 'products:catalog' 'all' %}"><b>ВСЕ ТОВАРЫ &#40;{{ total_products }}&#41;</b></a>
+    {% for category in categories_with_counts %}
+      <div class="categoryItem">
+        <a href="{% url 'products:catalog' category.slug %}" class="categoryButton" id="{{ category.name }}">
+          {{ category.name }} &#40;{{ category.num_products }}&#41; 
+        </a>
+        <a onclick="showSubcategories('{{ category.slug }}')">
+          <svg class="catalogArrow"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.10073 9.80399">
+            <path d="M0,0,7.05023,2.45114,14.10073,4.902,7.05023,7.35291,0,9.804C2.35793,6.59817,2.40356,3.33138,0,0Z" />
+          </svg>
+        </a>
+      </div>
+    {% empty %}
+      <p>Нет элементов!</p>
+    {% endfor %}
+    <input id="inputText" type="search" placeholder="Поиск" />
+  </article>
+  <article class="subcategory" id="subcategoryList">
+  </article>
+</nav>
+
+{% block script %}
+  <script src="{% static 'scripts/includes/catalog.js' %}" async></script>
+{% endblock script %}
+
+
